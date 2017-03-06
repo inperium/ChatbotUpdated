@@ -94,7 +94,7 @@ public class ChatController {
 		}
 		return answer;
 	}
-	
+
 	public void handleErrors(Exception currentException) {
 		display.displayMessage("An error has occured. Details:");
 		display.displayMessage(currentException.getMessage());
@@ -108,5 +108,10 @@ public class ChatController {
 
 	public ChatFrame getBaseFrame() {
 		return this.chatFrame;
+	}
+
+	public Object getPopup() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
