@@ -9,6 +9,7 @@ public class ChatController {
 	private ChatbotViewer display;
 	private ChatFrame chatFrame;
 	public String questionList[] = { "What is the meaning of life?", "What do you like to do?", "Where do you live?" };
+	private CTECTwitter tweetBot;
 
 	/**
 	 * Constructs Chatbot, display, and chatFrame.
@@ -20,6 +21,7 @@ public class ChatController {
 
 	public ChatController() {
 		stupidBot = new Chatbot("Steve");
+		tweetBot = new CTECTwitter(this);
 		display = new ChatbotViewer();
 		chatFrame = new ChatFrame(this);
 	}
@@ -74,7 +76,7 @@ public class ChatController {
 								} else {
 									if (stupidBot.twitterChecker(input)) {
 										answer += "I twitter too.";
-									}else{
+									} else {
 										if (stupidBot.lengthChecker(input)) {
 											answer += "Sorry, I don't know about " + input + ".";
 										} else {
@@ -111,7 +113,10 @@ public class ChatController {
 	}
 
 	public Object getPopup() {
-		// TODO Auto-generated method stub
-		return null;
+		return chatFrame;
+	}
+
+	public void useTwitter(String text) {
+		tweetBot.sendtweet(text);
 	}
 }

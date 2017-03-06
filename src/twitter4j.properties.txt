@@ -1,0 +1,5 @@
+oauth.consumerKey=FICTeXjUgbhGo7I786wGpG29E
+oauth.consumerSecret=Mx51O6kCTjG0pzsiunHsaQeylcNfv09QYMBaICNuuZTBNox3KG
+oauth.accessToken=837404495210401792-nZrIizWeK79SPeG330G5A38D3APxTw8
+oauth.accessTokenSecret=PMNAjngwOJZ628fWeDQAKNfAXhDJm5Q7PqdieDtMyWSmU
+Dtwitter4j.loggerFactory =twitter4j.NullLoggerFactory
