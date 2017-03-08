@@ -118,6 +118,12 @@ public class ChatController {
 	}
 
 	public void useTwitter(String text) {
-		tweetBot.sendtweet(text);
+		tweetBot.sendTweet(text);
+	}
+
+	public String searchTwitter(String name) {
+		String results = "";
+		results += tweetBot.getMostTweetedWord(name);
+		return results;
 	}
 }
