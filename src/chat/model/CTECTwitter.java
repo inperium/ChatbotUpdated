@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import chat.controller.ChatController;
+import twitter4j.GeoLocation;
 import twitter4j.Paging;
+import twitter4j.Query;
+import twitter4j.QueryResult;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -160,5 +163,25 @@ public class CTECTwitter {
 		}
 		
 		return scrubbedString;
+	}
+	
+	public String mostPopularAtLocation() 
+	{
+		String results = "";
+		
+		Query query = new Query("");
+		query.setCount(100);
+		query.setGeoCode(new GeoLocation(38.8977,77.0365), 50, Query.MILES);
+		query.setSince("2017-1-1");
+		try
+		{
+			QueryResult result =  chabotTwitter.search(query);
+			results += "";
+		}
+		catch (TwitterException error)
+		{
+			error.printStackTrace();
+		}
+		return results;
 	}
 }
