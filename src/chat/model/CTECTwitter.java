@@ -1,5 +1,6 @@
 package chat.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -79,6 +80,8 @@ public class CTECTwitter {
 			}
 		}
 	}
+	
+
 
 	private void gatherTweets(String user) {
 		tweetedWords.clear();
@@ -98,23 +101,25 @@ public class CTECTwitter {
 	}
 
 	private void turnTweetToWords() {
-		for (Status currentTweet : allTheTweets) {
-			String text = currentTweet.getText();
+		for (Status currentStatus : allTheTweets) {
+			String text = currentStatus.getText();
 			String[] tweetWords = text.split(" ");
-			for (String word : tweetWords) {
-				tweetedWords.add(word);
+			for (int index = 0; index < tweetWords.length; index++) {
+				tweetedWords.add(removePunctuation(tweetWords[index]));
 			}
 		}
 	}
 
 	public String getMostTweetedWord(String user) {
+		String results = "";
 		this.gatherTweets(user);
+		this.turnTweetToWords();
+		
 		this.removeBoringWords();
 		this.removeBlankWords();
-
-		String info = "What we were supposed to do" + "";
-
-		return info;
+		
+		results = "from " + user + calculateTopWord();
+		return results;
 	}
 
 	private String calculateTopWord() {
@@ -126,7 +131,7 @@ public class CTECTwitter {
 		for (int index = 0; index < tweetedWords.size(); index++) {
 			int currentPopularity = 0;
 			for (int searched = index + 1; searched < tweetedWords.size(); searched++) {
-				if (tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched))) {
+				if (tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched)) && !tweetedWords.get(index).equals(topWord)) {
 					currentPopularity++;
 				}
 				if (currentPopularity > popularCount) {
@@ -134,13 +139,26 @@ public class CTECTwitter {
 					mostPopularIndex = index;
 					topWord = tweetedWords.get(mostPopularIndex);
 				}
-				currentPopularity = 0;
 			}
 		}
-
-		results += " the most popular word was " + topWord + ", and it occured " + popularCount + "times.";
-		results += "\nThat means it has a percentage of " + ((double) popularCount / tweetedWords.size())*100 + "%";
-
+		results += "/n The most popular word was " + topWord + ", and it occured " + popularCount + " times out of "
+				+ tweetedWords.size() +", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size()));
+		
 		return results;
+	}
+	
+	private String removePunctuation(String currentString)
+	{
+		String punctuation = ",'?!:;\"()[]^[]<>-";
+		
+		String scrubbedString = "";
+		for (int i = 0; i < currentString.length(); i++){
+			if(punctuation.indexOf(currentString.charAt(i))== -1)
+			{
+				scrubbedString += currentString.charAt(i);
+			}
+		}
+		
+		return scrubbedString;
 	}
 }

@@ -60,6 +60,8 @@ public class ChatPanel extends JPanel {
 		this.add(save);
 		this.add(load);
 		this.add(searchTwitter);
+		chatDisplay.setWrapStyleWord(true);
+		chatDisplay.setLineWrap(true);
 	}
 
 	private void setupLayout() {
