@@ -142,7 +142,7 @@ public class CTECTwitter {
 			}
 		}
 		results += "/n The most popular word was " + topWord + ", and it occured " + popularCount + " times out of "
-				+ tweetedWords.size() +", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size()));
+				+ tweetedWords.size() +", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size())) + ".";
 		
 		return results;
 	}
