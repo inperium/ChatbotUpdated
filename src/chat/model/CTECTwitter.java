@@ -175,7 +175,7 @@ public class CTECTwitter {
 		query.setSince("2017-1-1");
 		try
 		{
-			QueryResult result =  chabotTwitter.search(query);
+			QueryResult result =  twitterBot.search(query);
 			results += "";
 		}
 		catch (TwitterException error)
