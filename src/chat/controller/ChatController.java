@@ -126,4 +126,10 @@ public class ChatController {
 		results += tweetBot.getMostTweetedWord(name);
 		return results;
 	}
+
+	public String mostPopularAtLocation() {
+		String results = "";
+		results += tweetBot.mostPopularAtLocation();
+		return results;
+	}
 }

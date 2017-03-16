@@ -144,7 +144,7 @@ public class CTECTwitter {
 				}
 			}
 		}
-		results += "/n The most popular word was " + topWord + ", and it occured " + popularCount + " times out of "
+		results += topWord + " and it occured " + popularCount + " times out of "
 				+ tweetedWords.size() +", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size())) + ".";
 		
 		return results;
@@ -168,15 +168,25 @@ public class CTECTwitter {
 	public String mostPopularAtLocation() 
 	{
 		String results = "";
-		
+		tweetedWords.clear();
 		Query query = new Query("");
 		query.setCount(100);
-		query.setGeoCode(new GeoLocation(38.8977,77.0365), 50, Query.MILES);
-		query.setSince("2017-1-1");
+		query.setGeoCode(new GeoLocation(38.8977,77.0365), 1000, Query.MILES);
+		query.setLang("en");
+		query.setSince("2016-1-1");
 		try
 		{
 			QueryResult result =  twitterBot.search(query);
-			results += "";
+			//results += "Count : " + result.getTweets().size() + "\n";
+			allTheTweets = result.getTweets();
+//			for(Status tweet : result.getTweets())
+//			{
+//				tweetedWords.add(tweet.getText());
+//			}
+			this.turnTweetToWords();
+			this.removeBoringWords();
+			this.removeBlankWords();
+			results = "The top word at the given location (Washington DC) is: " + calculateTopWord();
 		}
 		catch (TwitterException error)
 		{

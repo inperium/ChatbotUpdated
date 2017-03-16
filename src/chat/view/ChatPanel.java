@@ -13,6 +13,7 @@ import javax.swing.SpringLayout;
 
 import chat.controller.ChatController;
 import chat.controller.FileController;
+import chat.model.CTECTwitter;
 
 public class ChatPanel extends JPanel {
 	private ChatController baseController;
@@ -131,9 +132,12 @@ public class ChatPanel extends JPanel {
 		searchTwitter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent click) {
-				String username = chatField.getText();
-				chatDisplay.append(baseController.searchTwitter(username));
+				//String username = chatField.getText();
+				//chatDisplay.append(baseController.searchTwitter(username));
+				String mostPopular = baseController.mostPopularAtLocation();
+				chatDisplay.append(mostPopular);
 			}
+
 		});
 	}
 }
